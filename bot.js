@@ -22,10 +22,10 @@ function respond() {
   else if(request.text && botRegexZap.test(request.text)) {
     this.res.writeHead(200);
     var req = request.text.substring(8,request.text.length);
-    if (req.equals("ad") || req.equals("AD")) {
+    if (req === "ad" || req === "AD") {
       postMessage("http://i.imgur.com/HUPYJ4N.jpg");
     }
-    else if (req.equals("it") || req.equals("IT")) {
+    else if (req === "it" || req === "IT") {
       postMessage("http://i.imgur.com/KP2VlH1.jpg");
     }
     else {
