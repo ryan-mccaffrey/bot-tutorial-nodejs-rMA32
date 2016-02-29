@@ -13,7 +13,7 @@ function respond() {
       botRegexBC = /^\/bestclasher/;
       siege1 = 'https://i.groupme.com/350x419.png.adc8c73a6c1547e0a9e04320296329f8'; siege2 = 'https://i.groupme.com/1279x752.jpeg.aa5d0401e0df495bba4b4e09dc5a6bd7'
       siege3 = 'https://i.groupme.com/960x960.png.006e180e05d841c6a2962e844bf1e6fd';
-  var defenseAb = ["AD", "IT"]
+  var defenseAb = ["AD", "IT", "ad", "it"]
   if(request.text && botRegex.test(request.text)) {
     this.res.writeHead(200);
     postMessage(cool());
@@ -22,10 +22,10 @@ function respond() {
   else if(request.text && botRegexZap.test(request.text)) {
     this.res.writeHead(200);
     var req = request.text.substring(8,request.text.length);
-    if (req.equals("AD")) {
+    if (req.equals("ad") || req.equals("AD")) {
       postMessage("http://i.imgur.com/HUPYJ4N.jpg");
     }
-    else if (req.equals("IT")) {
+    else if (req.equals("it") || req.equals("IT")) {
       postMessage("http://i.imgur.com/KP2VlH1.jpg");
     }
     else {
