@@ -1,21 +1,21 @@
 {
-  "name": "node-js-getting-started",
-  "version": "0.1.2",
-  "description": "A sample Node.js app using Express 4",
+  "name": "groupme-bot",
+  "version": "0.0.1",
+  "description": "A Nodejs bot for groupme",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
     "director": "",
-    "cool-ascii-faces": "~1.3.x"
+    "mongodb": ""
   },
   "engines": {
-    "node": "0.10.x"
+    "node": ">= 0.6.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/batorobe/bot-tutorial-nodejs"
+    "url": "https://github.com/ryan-mccaffrey/bot-tutorial-nodejs-rMA32"
   },
   "keywords": [
     "node",

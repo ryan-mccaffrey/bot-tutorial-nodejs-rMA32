@@ -1,150 +1,93 @@
 var HTTPS = require('https');
-var cool = require('cool-ascii-faces');
 
 var botID = process.env.BOT_ID;
 
-function respond() {
-  var request = JSON.parse(this.req.chunks[0]),
-      botRegex = /^\/cool guy/;  botRegexDL = /^\/DDL/i;botRegexSalt = /^\/salt/;botRegexRules = /^\/rules/
-      botRegexAd=/^\/advance/;botRegexGTA = /^\/gta/; botRegexSC = /^\/SDL/i; botODB = /(.*\s+)(.*odb)(\s+.*)/i; botDuck = /^\/duck/;
-      botRegexP = /^\/PDL/i;  botRegexTw = /^\/twitch/i; botRegexSb = /^\/sub/; botRegexSh = /^\/shrug/; botRegexWk = /^\/users/; botRegexCC = /^\/cc/;
-      botRegexSiege = /^\/siege/;
-      botRegexZap = /^\/zapquake/i;
-      botRegexBC = /^\/bestclasher/;
-      botRegexDef = /^\/defenseweights/;
-      botRegexTS = /^\/tsinfo/;
-      siege1 = 'https://i.groupme.com/350x419.png.adc8c73a6c1547e0a9e04320296329f8'; siege2 = 'https://i.groupme.com/1279x752.jpeg.aa5d0401e0df495bba4b4e09dc5a6bd7'
-      siege3 = 'https://i.groupme.com/960x960.png.006e180e05d841c6a2962e844bf1e6fd';
-  var defenseAb = ["AD", "IT", "ad", "it"]
-  if(request.text && botRegex.test(request.text)) {
-    this.res.writeHead(200);
-    postMessage(cool());
-    this.res.end();
-  } 
-  else if(request.text && botRegexZap.test(request.text)) {
-    this.res.writeHead(200);
-    var req = request.text.substring(10,request.text.length);
-    if (req === "ad" || req === "AD") {
-      postMessage("http://i.imgur.com/HUPYJ4N.jpg");
-    }
-    else if (req === "it" || req === "IT") {
-      postMessage("http://i.imgur.com/KP2VlH1.jpg");
-    }
-    else {
-      postMessage("Please specify what you are zapquaking: AD or IT");
-    }
-    this.res.end();
-  }
-  else if(request.text && botRegexBC.test(request.text)) {
-    this.res.writeHead(200);
-    postMessage("http://i.imgur.com/aFweIc0.jpg");
-    this.res.end();
-  }
-  else if(request.text && botRegexTS.test(request.text)) {
-    this.res.writeHead(200);
-    postMessage("Teamspeak server info:\nAddress: ts89.gameservers.com:9163\nPassword: North");
-    this.res.end();
-  }
-  else if(request.text && botRegexDef.test(request.text)) {
-    this.res.writeHead(200);
-    postMessage("http://i.imgur.com/bjBdKbO.png");
-    this.res.end();
-  }
-  else if(request.text && botRegexDL.test(request.text)) {
-    this.res.writeHead(200);
-    postMessage("http://daddyleagues.com/SRMFL/team/"+request.text.substring(5,8)+"/depthchart");
-    this.res.end();
-  } 
-  else if(request.text && botRegexSalt.test(request.text)) {
-    this.res.writeHead(200);
-    postMessage("https://i.imgur.com/B5BSVqH.png");
-    this.res.end();
-  } 
-  else if(request.text && botRegexAd.test(request.text)) {
-    this.res.writeHead(200);
-    postMessage("http://www.hackcollege.com/wp-content/uploads/2013/02/kno_advance.jpg");
-    this.res.end();
-  }
-  else if(request.text && botRegexRules.test(request.text)) {
-    this.res.writeHead(200);
-    postMessage("https://docs.google.com/document/d/1hSuEG7oplnx4IX6HGsMOjsWb9TCqC4-F1NLjuBz5PCM/edit");
-    this.res.end();
-  } 
-  else if(request.text && botRegexGTA.test(request.text)) {
-    this.res.writeHead(200);
-    postMessage("https://i.groupme.com/220x147.jpeg.a2dd2add32b14fff9e329535186d793c.large");
-    this.res.end();
-  } 
-  else if(request.text && botRegexSC.test(request.text)) {
-    this.res.writeHead(200);
-    postMessage("http://daddyleagues.com/SRMFL/team/"+request.text.substring(5,8)+"/schedule");
-    this.res.end();
-  }
-  else if(request.text && botRegexP.test(request.text)) {
-    this.res.writeHead(200);
-    var req = request.text.substring(5,request.text.length);
-    var rep = req.replace(/ /,"+");
-    postMessage("http://daddyleagues.com/SRMFL/players?name="+rep+"&position=all&team=all");
-    this.res.end();
-  }  
+var sysCommands  = require('./modules/sys-commands.js');
+var db           = require('./modules/db.js');
+var mods         = require('./modules/mods.js');
+var commandList  = require('./modules/command-list.js');
+var rooms = require('./modules/rooms.js');
 
-  else if(request.text && botRegexTw.test(request.text)) {
-    this.res.writeHead(200);
-    postMessage("http://www.twitch.tv/"+request.text.substring(8,request.text.length));
-    this.res.end();
-  } 
-  else if(request.text && botRegexSb.test(request.text)) {
-    this.res.writeHead(200);
-    postMessage("http://www.reddit.com/r/maddenall32");
-    this.res.end();
-  } 
-  else if(request.text && botRegexSh.test(request.text)) {
-    this.res.writeHead(200);
-    postMessage("¯\\_(ツ)_/¯");
-    this.res.end();
-  } 
-  else if(request.text && botRegexWk.test(request.text)) {
-    this.res.writeHead(200);
-    postMessage("https://docs.google.com/spreadsheets/d/1kJqQWCq3RKiTrd4f71FFNKr-Y0ppJzjk0fSF0rP6Bto/edit?usp=sharing");
-    this.res.end();
-  } 
-  else if(request.text && botODB.test(request.text)) {
-    this.res.writeHead(200);
-    postMessage("OBJ*");
-    this.res.end();
-  } 
-  else if(request.text && botDuck.test(request.text)) {
-    this.res.writeHead(200);
-    postMessage("http://media3.giphy.com/media/YCseTHF2I6CCA/giphy.gif");
-    this.res.end();
-  }
-  else if(request.text && botRegexCC.test(request.text)) {
-    this.res.writeHead(200);
-    postMessage("https://i.groupme.com/851x1184.jpeg.330228901f684b0cb46cd1cef6953923");
-    this.res.end();
-  }
-  else if(request.text && botRegexSiege.test(request.text)) {
-    this.res.writeHead(200);
-    if(0.6 >= Math.random() > 0.3)
-      postMessage(siege1);
-    else if(Math.random() >0.6)
-      postMessage(siege3)
-    else
-      postMessage(siege2);
-    this.res.end();
-  }
-  
-  else {
-    console.log("Fuck off");
-    this.res.writeHead(200);
-    this.res.end();
+//commands with custom actions
+var userCmds     = require('./custom_commands/user-commands.js');
+var userMentions = require('./custom_commands/user-mentions.js');
+var sysTriggers  = require('./custom_commands/system-triggers.js');
+var quotes       = require('./custom_commands/quotes.js');
+var atEveryone   = require('./custom_commands/at-everyone.js');
+var funCommands  = require('./custom_commands/fun-commands.js');
+var gif          = require('./custom_commands/giphy-api.js');
+var catFact      = require('./custom_commands/cat-fact.js');
+var urbanDict = require('./custom_commands/urban-dictionary.js');
+
+//load config
+var config       = require('./config/config.js');
+var HTTPS = require('https');
+
+
+//Temporarily just an array of the commands functions. Make an object with configuration values.
+var checkCommandsHSH = [mods, sysTriggers, userCmds, userMentions, sysCommands, atEveryone, funCommands, quotes, rooms, gif, catFact, urbanDict];
+
+exports.init = function() {
+  var req = this.req;
+  init.initPage(req, function(body){
+    this.res.writeHead(200, {"Content-Type": "text/html"});
+    this.res.end(body);
+  });
+}
+
+exports.respond = function(botRoom) {
+  var request = JSON.parse(this.req.chunks[0]);
+
+  var dataHash = {
+    request:      request,
+    currentBot:   rooms.getRoom(botRoom),
+    isMod:        mods.isMod(request.user_id),
+    bots:         rooms.getRooms(),
+    funMode:      sysCommands.fun_mode(),
+    owner:        config.env().owner
+  };
+
+  this.res.writeHead(200);
+  this.res.end();
+
+  if (dataHash.request.sender_type == 'bot') return;
+  dataHash.request.text = dataHash.request.text.trim();
+
+  if (!rooms.getRoom(botRoom).id && botRoom != 'config')
+    return;
+
+  for(var lib in checkCommandsHSH) {
+    checkCommandsHSH[lib].checkCommands(dataHash, function(check, result, attachments){
+      if (check) sendDelayedMessage(result, attachments, rooms.getRoom(botRoom).id);
+    });
   }
 }
 
-function postMessage(response) {
-  var botResponse,options, body, botReq;
+exports.commands = function() {
+  var cmdArr = [];
 
-  botResponse = response
+  console.log('displaying commands at /commands');
+
+  for(var lib in checkCommandsHSH){
+    var newCmds = checkCommandsHSH[lib].getCmdListDescription();
+    if (newCmds)
+      cmdArr = cmdArr.concat(newCmds);
+  }
+
+  var output = commandList.buildHTML(cmdArr, config.bot_name);
+
+  this.res.writeHead(200, {"Content-Type": "text/html"});
+  this.res.end(output);
+}
+
+function sendDelayedMessage(msg, attachments, botID) {
+  setTimeout(function() {
+    postMessage(msg, attachments, botID);
+  }, config.delay_time);
+}
+
+function postMessage(botResponse, attachments, botID) {
+  var options, body, botReq;
 
   options = {
     hostname: 'api.groupme.com',
@@ -153,14 +96,15 @@ function postMessage(response) {
   };
 
   body = {
-    "bot_id" : botID,
-    "text" : botResponse
+    "attachments" : attachments,
+    "bot_id"      : botID,
+    "text"        : botResponse
   };
 
   console.log('sending ' + botResponse + ' to ' + botID);
 
   botReq = HTTPS.request(options, function(res) {
-      if(res.statusCode == 202) {
+      if (res.statusCode == 202) {
         //neat
       } else {
         console.log('rejecting bad status code ' + res.statusCode);
@@ -175,10 +119,3 @@ function postMessage(response) {
   });
   botReq.end(JSON.stringify(body));
 }
-
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
-}
-
-
-exports.respond = respond;

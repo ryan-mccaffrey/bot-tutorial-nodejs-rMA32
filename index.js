@@ -1,15 +1,25 @@
-var http, director, cool, bot, router, server, port;
+var http, director, bot, router, server, port, db;
 
 http        = require('http');
 director    = require('director');
-cool        = require('cool-ascii-faces');
 bot         = require('./bot.js');
 
 router = new director.http.Router({
   '/' : {
     post: bot.respond,
     get: ping
-  }
+  },
+  '/init' : {
+    get:  bot.init,
+    post: bot.init
+  },
+  '/commands' : {
+    get: bot.commands
+  },
+  '/bot/:botRoom' : {
+    get: ping,
+    post: bot.respond
+  },
 });
 
 server = http.createServer(function (req, res) {
@@ -24,7 +34,7 @@ server = http.createServer(function (req, res) {
   });
 });
 
-port = Number(process.env.PORT || 5000);
+port = Number(process.env.PORT || 3002);
 server.listen(port);
 
 function ping() {
