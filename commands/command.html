@@ -1,0 +1,75 @@
+<html>
+  <head>
+    <title>$$bot_name Command List</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <style>
+      html {
+        font-family: 'Montserrat', sans-serif;
+      }
+      .command_cont {
+        padding: 10px;
+        list-style-type: none;
+      }
+      .command_name {
+        overflow: hidden;
+        margin: .3em;
+        width:22%;
+        float:left;
+      }
+      .command_name:hover {
+        background: #eee;
+      }
+      .command_desc {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 5px 0 0 5px;
+        background: #eee;
+        border: 1px solid #000;
+        border-radius: 3px;
+        display: none;
+      }
+      h2 {
+        clear: both;
+        padding-top: 15px;
+        padding-bottom: 0;
+      }
+      .clear {
+        clear: both;
+      }
+    </style>
+
+  </head>
+
+  <body>
+    <div class="command_module">
+      <h2>Commands</h2>
+      Click command for a description.
+      <ul class='command_cont'>
+        $$all
+      </ul>
+
+      <h2>Mod Commands</h2>
+      <ul class='command_cont'>
+        $$mod
+      </ul>
+
+
+      <h2>Owner Commands</h2>
+      <ul class='command_cont'>
+        $$owner
+      </ul>
+    </div>
+    <div class='clear'>
+    </div>
+  </body>
+</html>
+
+<script>
+  $('.command_name').click(function(){
+    var currentDiv = $(this);
+    $('.command_name').children('div').hide();
+    currentDiv.children('div').fadeIn('slow');
+  });
+</script>
