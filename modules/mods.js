@@ -93,9 +93,14 @@ function addModCmd(request, owner, callback) {
       return "You wish you could add mods.";
     }
 
-    if (!request.attachments[0].user_ids){
-      callback(true, "You have to mention the user you want to mod using @");
-      return "You have to mention the user you want to mod user @";
+    try {
+      if (!request.attachments[0].user_ids){
+        callback(true, "You have to mention the user you want to mod using @");
+        return "You have to mention the user you want to mod user @";
+      }
+    } catch(error) {
+      callback(true, "Error while adding mod, likely because no user mentioned with @");
+      return "Error while adding mod, likely because no user mentioned with @";
     }
 
     var val = regex.exec(request.text);
