@@ -39,11 +39,13 @@ exports.getMods = function() {
   return mods;
 }
 
-exports.isMod = function(id) {
+exports.isMod = function(id, owner) {
   for (mod in mods) {
     if (mods[mod].id == id)
       return true;
   }
+  if (id == owner.id)
+    return true;
 
   return false;
 }
